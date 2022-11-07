@@ -60,14 +60,15 @@ class MyRunnable(Runnable):
             # Generate an ssh rsa key using ssh-keygen
             print('Generating SSH Key')
             try:
-                ssh_key, stderr = generate_key(self.project_key)
+                sh_key, gen_stderr, read_stderr = generate_key(self.project_key)
                 print('Generated SSH Key: {}'.format(ssh_key))
             except:
                 raise Exception('Failed to generate ssh key.')
             raise Exception('''
             SSH Key: {}
-            STDERR" {}
-            '''.format(ssh_key,stderr))
+            GEN_STDERR: {}
+            READ_STDERR: {}
+            '''.format(ssh_key,gen_stderr,read_stderr))
             # Create or update the project variable storing the ssh key
             print('Updating project variables with SSH Key.')
             try:
