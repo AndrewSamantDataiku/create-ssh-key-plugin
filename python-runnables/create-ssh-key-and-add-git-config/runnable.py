@@ -27,7 +27,7 @@ class MyRunnable(Runnable):
         The progress_callback is a function expecting 1 value: current progress
         """
         
-        update_git_settings(git_group,project_key, git_config_template=base_git_config_template)
+        ssh_key = update_git_settings(git_group,project_key, git_config_template=base_git_config_template)
         
         raise Exception("unimplemented")
         
