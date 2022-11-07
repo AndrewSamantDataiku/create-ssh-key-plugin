@@ -11,7 +11,7 @@
         "label": "Git Security Management",
 
         // description: longer string to help end users understand what this plugin does
-        "description": "",
+        "description": "This plugin creates a new SSH Key and then creates a new Git Security group in DSS that uses this ssh key.",
 
         "author": "andrew",
 
