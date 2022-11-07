@@ -2,7 +2,7 @@
 {
     "meta": {
         // label: name of the runnable as displayed, should be short
-        "label": "Custom runnable create-ssh-key-and-add-git-config",
+        "label": "Create SSH Key and Add Git Config",
 
         // description: longer string to help end users understand what this runnable does
         "description": "",
