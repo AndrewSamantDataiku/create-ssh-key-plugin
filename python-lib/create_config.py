@@ -9,13 +9,13 @@ def generate_key(project_key):
     gen_stdout, gen_stderr = process.communicate()
     
     if gen_stderr.decode("utf-8") != '':
-        raise Excepetion("SSH Error Generating SSH Key: {}".format(gen_stderr.decode("utf-8")))
+        raise Exception("SSH Error Generating SSH Key: {}".format(gen_stderr.decode("utf-8")))
     # Print the contents of the rsa-key.pub file
     process = Popen(['cat','rsa-key.pub'], stdout=PIPE, stderr=PIPE)
     read_stdout, read_stderr = process.communicate()
     
     if read_stderr.decode("utf-8") != '':
-        raise Excepetion("SSH Error Reading SSH Key: {}".format(read_stderr.decode("utf-8")))
+        raise Exception("SSH Error Reading SSH Key: {}".format(read_stderr.decode("utf-8")))
     # Prase out the trailing \n and recode to utf-8 format.
     ssh_key = read_stdout.decode("utf-8").replace('\n','')
     
