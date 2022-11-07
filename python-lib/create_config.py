@@ -31,7 +31,7 @@ def generate_key():
     
     
 
-def create_config(group,key,git_config_template):
+def create_config(group, key, git_config_template):
     
     config = git_config_template
     
