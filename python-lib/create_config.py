@@ -12,7 +12,7 @@ def generate_key(project_key):
     # Prase out the trailing \n and recode to utf-8 format.
     ssh_key = stdout.decode("utf-8").replace('\n','')
     
-    return ssh_key
+    return ssh_key, stderr
     
     
 
