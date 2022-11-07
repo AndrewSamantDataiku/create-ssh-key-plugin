@@ -5,12 +5,7 @@ from create_config import generate_key, create_config
 
 
 
-base_git_config_template = {'allowGit': True,
-  'dssControlsSSHCommand': True,
-  'gitConfigurationOptions': [{'key': 'core.sshCommand',
-    'value': 'ssh -i /home/dataiku/.ssh/{ssh_key} -o StrictHostKeyChecking=yes'}],
-  'groupName': '{group_name}',
-  'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
+
 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
@@ -25,7 +20,14 @@ class MyRunnable(Runnable):
         self.config = config
         self.plugin_config = plugin_config
         self.client = dataiku.api_client()
-        
+        self.git_config_template = base_git_config_template = {
+                              'allowGit': True,
+                              'dssControlsSSHCommand': True,
+                              'gitConfigurationOptions': [{'key': 'core.sshCommand',
+                                'value': 'ssh -i /home/dataiku/.ssh/{ssh_key} -o StrictHostKeyChecking=yes'}],
+                              'groupName': '{group_name}',
+                              'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
+
     def get_progress_target(self):
         """
         If the runnable will return some progress info, have this function return a tuple of 
