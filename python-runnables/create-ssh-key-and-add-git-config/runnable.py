@@ -48,16 +48,16 @@ class MyRunnable(Runnable):
         git_group = self.config.get('group_name','')
         
         if git_group=='':
-            raise("You must enter a git group.")
+            raise Exception("You must enter a git group.")
         elif git_group in existing_group_list:
-            raise("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
+            raise Exception("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
         else:
             print('Generating SSH Key')
             try:
                 ssh_key = generate_key(self.project_key)
                 print('Generated SSH Key: {}'.format(ssh_key))
             except:
-                raise('Failed to generate ssh key.')
+                raise( Exception'Failed to generate ssh key.')
             
             # Create or update the project variable storing the ssh key
             print('Updating project variables with SSH Key.')
