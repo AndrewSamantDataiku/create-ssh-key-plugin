@@ -64,3 +64,4 @@ def update_git_settings(git_group, git_config_template=base_git_config_template)
         general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
         general_settings.save()
         print("New Configuration Group {} added successfully".format(git_group))
+        return ssh_key
