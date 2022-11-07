@@ -42,7 +42,7 @@ class MyRunnable(Runnable):
         git_config_list = general_settings_json['git']['enforcedConfigurationRules']
         existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
         
-        git_group = self.config.get('git_group')
+        git_group = self.config.get('group_name')
         
         if git_group=='':
             raise("You must enter a git group.")
