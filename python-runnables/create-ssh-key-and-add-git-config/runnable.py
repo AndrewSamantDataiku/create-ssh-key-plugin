@@ -3,7 +3,7 @@ import dataiku
 from dataiku.runnables import Runnable
 from create_config import generate_key, create_config
 
-client = dataiku.api_client()
+
 
 base_git_config_template = {'allowGit': True,
   'dssControlsSSHCommand': True,
@@ -24,6 +24,7 @@ class MyRunnable(Runnable):
         self.project_key = project_key
         self.config = config
         self.plugin_config = plugin_config
+        self.client = client = dataiku.api_client()
         
     def get_progress_target(self):
         """
@@ -37,7 +38,7 @@ class MyRunnable(Runnable):
         Do stuff here. Can return a string or raise an exception.
         The progress_callback is a function expecting 1 value: current progress
         """
-        general_settings_handle = client.get_general_settings()
+        general_settings_handle = self.client.get_general_settings()
         general_settings_json = general_settings.get_raw()
         git_config_list = general_settings_json['git']['enforcedConfigurationRules']
         existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
