@@ -5,7 +5,7 @@
         "label": "Create SSH Key and Add Git Config",
 
         // description: longer string to help end users understand what this runnable does
-        "description": "PLugin to generate a new SSH Key and then add it to a new Git Security Group on this DSS instance.",
+        "description": "Generate a new SSH Key and create a new Git Security Group that uses this SSH Key.",
 
         // icon: must be one of the FontAwesome 3.2.1 icons, complete list here at https://fontawesome.com/v3.2.1/icons/
         "icon": "icon-github-sign"
