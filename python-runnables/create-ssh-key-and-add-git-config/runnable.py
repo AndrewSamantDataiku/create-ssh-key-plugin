@@ -56,6 +56,14 @@ class MyRunnable(Runnable):
                 print('Generated SSH Key: {}'.format(ssh_key))
             except:
                 raise('Failed to generate ssh key.')
+            
+            # Create or update the project variable storing the ssh key
+            project = client.get_project(project_key)
+            variables = project.get_variables()
+            variables['standard']['GitSSHKey'] = ssh_key
+            project.set_variables(variables)
+
+
             print("Generating New Git Configuration Settings")
             try:
                 new_config_list = create_config(git_group,ssh_key,git_config_template)

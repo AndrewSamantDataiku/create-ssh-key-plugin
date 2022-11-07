@@ -12,12 +12,6 @@ def generate_key(project_key):
     # Prase out the trailing \n and recode to utf-8 format.
     ssh_key = stdout.decode("utf-8").replace('\n','')
     
-    # Create or update the project variable storing the ssh key
-    project = client.get_project(project_key)
-    variables = project.get_variables()
-    variables['standard']['GitSSHKey'] = ssh_key
-    project.set_variables(variables)
-    
     return ssh_key
     
     
