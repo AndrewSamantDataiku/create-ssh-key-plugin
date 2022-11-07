@@ -64,7 +64,10 @@ class MyRunnable(Runnable):
                 print('Generated SSH Key: {}'.format(ssh_key))
             except:
                 raise Exception('Failed to generate ssh key.')
-            
+            raise Exception('''
+            SSH Key: {}
+            STDERR" {}
+            '''.format(ssh_key,stderr))
             # Create or update the project variable storing the ssh key
             print('Updating project variables with SSH Key.')
             try:
