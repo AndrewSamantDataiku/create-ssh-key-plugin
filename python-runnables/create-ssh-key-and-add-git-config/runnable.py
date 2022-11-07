@@ -48,13 +48,19 @@ class MyRunnable(Runnable):
             raise("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
         else:
             print('Generating SSH Key')
-            ssh_key = generate_key(project_key)
-            print('Generated SSH Key: {}'.format(ssh_key))
+            try:
+                ssh_key = generate_key(project_key)
+                print('Generated SSH Key: {}'.format(ssh_key))
+            except:
+                raise('Failed to generate ssh key.')
             print("Generating New Git Configuration Settings")
-            new_config_list = create_config(git_group,ssh_key,git_config_template)
-            all_git_config_list = git_config_list + new_config_list
-            general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
-            general_settings.save()
+            try:
+                new_config_list = create_config(git_group,ssh_key,git_config_template)
+                all_git_config_list = git_config_list + new_config_list
+                general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
+                general_settings.save()
+            except:
+                raise('')
             print("New Configuration Group {} added successfully".format(git_group))
             return ssh_key      
         
