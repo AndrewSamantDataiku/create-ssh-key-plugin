@@ -5,7 +5,7 @@ from subprocess import Popen, PIPE
 def generate_key(project_key):
     
     # Create new ssh key and save to the rsa-key.pub file
-    process = Popen(['ssh-keygen', '-t', 'rsa','-b','2048','-f','rsa-key','-P',""], stdout=PIPE, stderr=PIPE)
+    process = Popen(['ssh-keygen', '-t', 'rsa','-b','2048','-f','rsa-key','-P',"a"], stdout=PIPE, stderr=PIPE)
     gen_stdout, gen_stderr = process.communicate()
     
     if gen_stderr.decode("utf-8") != '':
