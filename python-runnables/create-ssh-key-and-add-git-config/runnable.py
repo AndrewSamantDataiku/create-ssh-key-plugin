@@ -65,8 +65,12 @@ class MyRunnable(Runnable):
             except:
                 raise Exception('Failed to generate ssh key.')
             
+            # Throw an error if the subprocess commands failed to create and read the new ssh key
             if gen_stderr.decode("utf-8") != '':
-                raise Exception("Error Generating SSH Key: {}".format(gen_stderr.decode("utf-8")))
+                raise Exception("Error Generating SSH Key: {}".format(gen_stderr.decode("utf-8")))     
+            if read_stderr.decode("utf-8") != '':
+                raise Exception("Error Reading SSH Key: {}".format(read_stderr.decode("utf-8")))
+            
             # Create or update the project variable storing the ssh key
             print('Updating project variables with SSH Key.')
             try:

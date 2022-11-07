@@ -12,8 +12,6 @@ def generate_key(project_key):
     process = Popen(['cat','rsa-key.pub'], stdout=PIPE, stderr=PIPE)
     read_stdout, read_stderr = process.communicate()
     
-    if read_stderr.decode("utf-8") != '':
-        raise Exception("Error Reading SSH Key: {}".format(read_stderr.decode("utf-8")))
     # Prase out the trailing \n and recode to utf-8 format.
     ssh_key = read_stdout.decode("utf-8").replace('\n','')
     
