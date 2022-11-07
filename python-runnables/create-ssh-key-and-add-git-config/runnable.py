@@ -49,7 +49,7 @@ class MyRunnable(Runnable):
         else:
             print('Generating SSH Key')
             try:
-                ssh_key = generate_key(project_key)
+                ssh_key = generate_key(self.project_key)
                 print('Generated SSH Key: {}'.format(ssh_key))
             except:
                 raise('Failed to generate ssh key.')
