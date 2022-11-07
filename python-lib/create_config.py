@@ -43,25 +43,3 @@ def create_config(group, key, git_config_template):
     
     return config
     
-def update_git_settings(git_group,project_key, git_config_template=base_git_config_template):
-
-    general_settings_handle = client.get_general_settings()
-    general_settings_json = general_settings.get_raw()
-    git_config_list = general_settings_json['git']['enforcedConfigurationRules']
-    existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
-
-    if git_group=='':
-        print("You must enter a git group.")
-    elif git_group in existing_group_list:
-        print("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
-    else:
-        print('Generating SSH Key')
-        ssh_key = generate_key(project_key)
-        print('Generated SSH Key: {}'.format(ssh_key))
-        print("Generating New Git Configuration Settings")
-        new_config_list = create_config(git_group,ssh_key,git_config_template)
-        all_git_config_list = git_config_list + new_config_list
-        general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
-        general_settings.save()
-        print("New Configuration Group {} added successfully".format(git_group))
-        return ssh_key
