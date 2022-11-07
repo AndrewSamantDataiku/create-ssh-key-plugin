@@ -26,8 +26,8 @@
     */
     "params": [
         {
-            "name": "parameter1",
-            "label": "User-readable name",
+            "name": "group_name",
+            "label": "Group Name",
             "type": "STRING",
             "description": "Some documentation for parameter1",
             "mandatory": true
