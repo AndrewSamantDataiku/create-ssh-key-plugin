@@ -4,9 +4,6 @@ from dataiku.runnables import Runnable
 from create_config import generate_key, create_config
 
 
-
-
-
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
 
