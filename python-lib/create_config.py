@@ -1,15 +1,6 @@
 import dataiku
 from subprocess import Popen, PIPE
 
-client = dataiku.api_client()
-
-base_git_config_template = {'allowGit': True,
-  'dssControlsSSHCommand': True,
-  'gitConfigurationOptions': [{'key': 'core.sshCommand',
-    'value': 'ssh -i /home/dataiku/.ssh/{ssh_key} -o StrictHostKeyChecking=yes'}],
-  'groupName': '{group_name}',
-  'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
-
 
 def generate_key(project_key):
     

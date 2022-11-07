@@ -1,6 +1,16 @@
 # This file is the actual code for the Python runnable create-ssh-key-and-add-git-config
+import dataiku
 from dataiku.runnables import Runnable
 from git-group-generation.create_config import generate_key, create_config
+
+client = dataiku.api_client()
+
+base_git_config_template = {'allowGit': True,
+  'dssControlsSSHCommand': True,
+  'gitConfigurationOptions': [{'key': 'core.sshCommand',
+    'value': 'ssh -i /home/dataiku/.ssh/{ssh_key} -o StrictHostKeyChecking=yes'}],
+  'groupName': '{group_name}',
+  'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
