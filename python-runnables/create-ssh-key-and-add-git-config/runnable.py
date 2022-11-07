@@ -38,18 +38,26 @@ class MyRunnable(Runnable):
     def run(self, progress_callback):
         """
         """
-        general_settings_handle = self.client.get_general_settings()
-        general_settings_json = general_settings_handle.get_raw()
-        git_config_list = general_settings_json['git']['enforcedConfigurationRules']
-        existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
         
         git_group = self.config.get('group_name','')
         
+        # Get general settings of the DSS instance
+        general_settings_handle = self.client.get_general_settings()
+        general_settings_json = general_settings_handle.get_raw()
+        
+        # Get the list of existing git groups
+        git_config_list = general_settings_json['git']['enforcedConfigurationRules']
+        existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
+        
+        
+        # Check that the git group inputted by the user is not blank and does not already exist
         if git_group=='':
             raise Exception("You must enter a git group.")
         elif git_group in existing_group_list:
             raise Exception("A group with the name '{}' already exists. Please contact your admin if you would like to change the ssh key or git settings for this group.".format(git_group))
         else:
+            
+            # Generate an ssh rsa key using ssh-keygen
             print('Generating SSH Key')
             try:
                 ssh_key, stderr = generate_key(self.project_key)
@@ -67,6 +75,7 @@ class MyRunnable(Runnable):
             except:
                 raise Exception('Failed to update project variables.')
 
+            # Create a new git config using this group and ssh key and and it to the general settings.
             print("Generating New Git Configuration Settings")
             try:
                 new_config = create_config(git_group,ssh_key,self.git_config_template)
