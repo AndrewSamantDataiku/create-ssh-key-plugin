@@ -1,6 +1,6 @@
 # This file is the actual code for the Python runnable create-ssh-key-and-add-git-config
 from dataiku.runnables import Runnable
-
+from git-group-generation.create_config import generate_key, create_config, 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
 
@@ -46,5 +46,4 @@ class MyRunnable(Runnable):
             general_settings.save()
             print("New Configuration Group {} added successfully".format(git_group))
             return ssh_key      
-            ssh_key = update_git_settings(git_group,project_key, git_config_template=base_git_config_template)
         
