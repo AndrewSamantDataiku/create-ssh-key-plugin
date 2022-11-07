@@ -73,7 +73,7 @@ class MyRunnable(Runnable):
                 general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
                 general_settings_handle.save()
             except:
-                raise('Failed to update Git Settings')
+                raise('Failed to update Git Settings in DSS.')
             print("New Configuration Group {} added successfully".format(git_group))
             return ssh_key      
         
