@@ -11,7 +11,7 @@ base_git_config_template = {'allowGit': True,
   'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
 
 
-def generate_key():
+def generate_key(project_key):
     
     # Create new ssh key and save to the rsa-key.pub file
     process = Popen(['ssh-keygen', '-t', 'rsa','-b','2048','-f','rsa-key'], stdout=PIPE, stderr=PIPE)
@@ -22,7 +22,7 @@ def generate_key():
     ssh_key = stdout.decode("utf-8").replace('\n','')
     
     # Create or update the project variable storing the ssh key
-    project = client.get_project(dataiku.default_project_key())
+    project = client.get_project(project_key)
     variables = project.get_variables()
     variables['standard']['GitSSHKey'] = ssh_key
     project.set_variables(variables)
@@ -43,7 +43,7 @@ def create_config(group, key, git_config_template):
     
     return config
     
-def update_git_settings(git_group, git_config_template=base_git_config_template):
+def update_git_settings(git_group,project_key, git_config_template=base_git_config_template):
 
     general_settings_handle = client.get_general_settings()
     general_settings_json = general_settings.get_raw()
@@ -56,7 +56,7 @@ def update_git_settings(git_group, git_config_template=base_git_config_template)
         print("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
     else:
         print('Generating SSH Key')
-        ssh_key = generate_key()
+        ssh_key = generate_key(project_key)
         print('Generated SSH Key: {}'.format(ssh_key))
         print("Generating New Git Configuration Settings")
         new_config_list = create_config(git_group,ssh_key,git_config_template)
