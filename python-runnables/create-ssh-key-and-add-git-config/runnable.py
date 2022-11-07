@@ -39,7 +39,7 @@ class MyRunnable(Runnable):
         The progress_callback is a function expecting 1 value: current progress
         """
         general_settings_handle = self.client.get_general_settings()
-        general_settings_json = general_settings.get_raw()
+        general_settings_json = general_settings_handle.get_raw()
         git_config_list = general_settings_json['git']['enforcedConfigurationRules']
         existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
         
@@ -61,7 +61,7 @@ class MyRunnable(Runnable):
                 new_config_list = create_config(git_group,ssh_key,git_config_template)
                 all_git_config_list = git_config_list + new_config_list
                 general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
-                general_settings.save()
+                general_settings_handle.save()
             except:
                 raise('')
             print("New Configuration Group {} added successfully".format(git_group))
