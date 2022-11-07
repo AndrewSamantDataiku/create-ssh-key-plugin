@@ -43,7 +43,7 @@ def create_config(group,key,git_config_template):
     
     return config
     
-def update_git_settings(git_group,git_config_template):
+def update_git_settings(git_group,git_config_template=base_git_config_template):
 
     general_settings_handle = client.get_general_settings()
     general_settings_json = general_settings.get_raw()
