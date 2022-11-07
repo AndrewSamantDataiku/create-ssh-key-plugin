@@ -47,7 +47,7 @@
     "resultType": "HTML",
 
     /* label to use when the runnable's result is not inlined in the UI (ex: for urls) */
-    "resultLabel": "my production",
+    "resultLabel": "Generate SSH Key",
 
     /* for FILE resultType, the extension to use for the temp file */
     "extension": "txt",
