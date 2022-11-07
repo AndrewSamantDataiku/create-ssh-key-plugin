@@ -58,7 +58,7 @@ class MyRunnable(Runnable):
                 raise('Failed to generate ssh key.')
             
             # Create or update the project variable storing the ssh key
-            project = self.client.get_project(project_key)
+            project = self.client.get_project(self.project_key)
             variables = project.get_variables()
             variables['standard']['GitSSHKey'] = ssh_key
             project.set_variables(variables)
