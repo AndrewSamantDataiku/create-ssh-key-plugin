@@ -6,7 +6,7 @@ def generate_key(project_key):
     
     # Create new ssh key and save to the rsa-key.pub file
     process = Popen(['ssh-keygen', '-t', 'rsa','-b','2048','-f','rsa-key'], stdout=PIPE, stderr=PIPE)
-    #gen_stdout, gen_stderr = process.stdout.readline(), process.stderr.readline()
+    gen_stdout, gen_stderr = '', '' #process.stdout.readline(), process.stderr.readline()
     # Print the contents of the rsa-key.pub file
     process = Popen(['cat','rsa-key.pub'], stdout=PIPE, stderr=PIPE)
     read_stdout, read_stderr = process.communicate()
