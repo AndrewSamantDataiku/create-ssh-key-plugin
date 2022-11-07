@@ -20,7 +20,7 @@ class MyRunnable(Runnable):
         self.config = config
         self.plugin_config = plugin_config
         self.client = dataiku.api_client()
-        self.git_config_template = base_git_config_template = {
+        self.git_config_template = {
                               'allowGit': True,
                               'dssControlsSSHCommand': True,
                               'gitConfigurationOptions': [{'key': 'core.sshCommand',
