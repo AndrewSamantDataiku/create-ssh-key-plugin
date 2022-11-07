@@ -25,7 +25,7 @@ class MyRunnable(Runnable):
                               'dssControlsSSHCommand': True,
                               'gitConfigurationOptions': [{'key': 'core.sshCommand',
                                 'value': 'ssh -i /home/dataiku/.ssh/{ssh_key} -o StrictHostKeyChecking=yes'}],
-                              'groupName': '{group_name}',
+                              'groupName': '',
                               'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
 
     def get_progress_target(self):
