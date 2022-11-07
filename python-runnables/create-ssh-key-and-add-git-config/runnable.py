@@ -32,9 +32,9 @@ class MyRunnable(Runnable):
         existing_group_list = [config.get('groupName','NO_GROUP_ENTERED') for config in git_config_list]
 
         if git_group=='':
-            print("You must enter a git group.")
+            raise("You must enter a git group.")
         elif git_group in existing_group_list:
-            print("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
+            raise("The {} group already exists. Please contact your admin if you would like to change the ssh key or git settings.".format(git_group))
         else:
             print('Generating SSH Key')
             ssh_key = generate_key(project_key)
