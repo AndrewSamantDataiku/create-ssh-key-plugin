@@ -68,7 +68,7 @@ class MyRunnable(Runnable):
 
             print("Generating New Git Configuration Settings")
             try:
-                new_config_list = create_config(git_group,ssh_key,git_config_template)
+                new_config_list = create_config(git_group,ssh_key,self.git_config_template)
                 all_git_config_list = git_config_list + new_config_list
                 general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
                 general_settings_handle.save()
