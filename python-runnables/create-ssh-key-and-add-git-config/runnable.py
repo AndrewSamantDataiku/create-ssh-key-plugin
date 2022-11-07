@@ -57,7 +57,7 @@ class MyRunnable(Runnable):
                 ssh_key = generate_key(self.project_key)
                 print('Generated SSH Key: {}'.format(ssh_key))
             except:
-                raise( Exception'Failed to generate ssh key.')
+                raise Exception('Failed to generate ssh key.')
             
             # Create or update the project variable storing the ssh key
             print('Updating project variables with SSH Key.')
@@ -67,7 +67,7 @@ class MyRunnable(Runnable):
                 variables['standard']['GitSSHKey'] = ssh_key
                 project.set_variables(variables)
             except:
-                raise('Failed to update project variables.')
+                raise Exception('Failed to update project variables.')
 
             print("Generating New Git Configuration Settings")
             try:
@@ -76,7 +76,7 @@ class MyRunnable(Runnable):
                 general_settings_json['git']['enforcedConfigurationRules'] = all_git_config_list
                 general_settings_handle.save()
             except:
-                raise('Failed to update Git Settings in DSS.')
+                raise Exception('Failed to update Git Settings in DSS.')
             print("New Configuration Group {} added successfully".format(git_group))
             return ssh_key      
         
