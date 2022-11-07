@@ -3,12 +3,25 @@ from subprocess import Popen, PIPE
 
 client = dataiku.api_client()
 
+git_config_template = {'allowGit': True,
+  'dssControlsSSHCommand': True,
+  'gitConfigurationOptions': [{'key': 'core.sshCommand',
+    'value': 'ssh -i /home/dataiku/.ssh/{ssh_key} -o StrictHostKeyChecking=yes'}],
+  'groupName': '{group_name}',
+  'remoteWhitelist': ['^(?:git|ssh|https?|git@[-\\w.]+):(\\/\\/)?(.*?)(\\.git)?(\\/?|\\#[-\\d\\w._]+?)$']}
+
+
 def generate_key():
+    
+    # Create new ssh key and save to the rsa-key.pub file
     process = Popen(['ssh-keygen', '-t', 'rsa','-b','2048','-f','rsa-key'], stdout=PIPE, stderr=PIPE)
+    # Print the contents of the rsa-key.pub file
     process = Popen(['cat','rsa-key.pub'], stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
+    # Prase out the trailing \n and recode to utf-8 format.
     ssh_key = stdout.decode("utf-8").replace('\n','')
     
+    # Create or update the project variable storing the ssh key
     project = client.get_project(dataiku.default_project_key())
     variables = project.get_variables()
     variables['standard']['GitSSHKey'] = ssh_key
