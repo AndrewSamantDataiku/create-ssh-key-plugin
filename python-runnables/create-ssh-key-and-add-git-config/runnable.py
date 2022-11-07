@@ -37,8 +37,6 @@ class MyRunnable(Runnable):
 
     def run(self, progress_callback):
         """
-        Do stuff here. Can return a string or raise an exception.
-        The progress_callback is a function expecting 1 value: current progress
         """
         general_settings_handle = self.client.get_general_settings()
         general_settings_json = general_settings_handle.get_raw()
