@@ -51,7 +51,7 @@ class MyRunnable(Runnable):
         if git_group=='':
             raise Exception("You must enter a git group.")
         elif git_group in existing_group_list:
-            raise Exception("A group with the name '{}' already exists. Please contact your admin if you would like to change the ssh key or git settings for this group.".format(git_group))
+            raise Exception("A Git Configuration for a group with the name '{}' already exists. Please contact your admin if you would like to change the ssh key or git settings for this group.".format(git_group))
         else:
             
             # Generate an ssh rsa key using ssh-keygen
