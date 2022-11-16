@@ -29,7 +29,7 @@
             "name": "group_name",
             "label": "Group Name",
             "type": "STRING",
-            "description": "Name of the DSS group that will use the new SSH key. This must be a DSS group that does not already have a git conguration.",
+            "description": "Name of the DSS group that will use the new SSH key. This must be a DSS group that does not already have a git conguration set up.",
             "mandatory": true
         }
     ],
